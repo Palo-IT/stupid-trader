@@ -14,9 +14,15 @@ var options = { method: 'POST',
 
 cron.schedule('1-59 * * * * *', function(){
   var value = random.integer(0, 1);
-  options['body']['price']=random.integer(1,50);
-  options['body']['volume']=random.integer(1,50);
-  if(value==0){options['body']['askbid']="bid"}else{options['body']['askbid']="ask"}
+  options['body']['volume']=random.integer(1,10);
+  if(value==0){
+    options['body']['askbid']="bid";
+    options['body']['price']=random.integer(15,20);
+  }
+  if(value==1){
+    options['body']['price']=random.integer(18,25);
+    options['body']['askbid']="ask";
+  }
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
     console.log(body);
